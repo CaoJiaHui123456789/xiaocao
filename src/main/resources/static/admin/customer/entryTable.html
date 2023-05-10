@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 禁止浏览器使用缓存 -->
+        <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+        <!-- 使用EasyUI的默认风格 -->
+        <link rel="stylesheet" type="text/css" href="../../css/themes/default/easyui.css">
+        <!-- 引入EasyUI的图标 -->
+        <link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="../../css/index.css">
+        <!-- 引入jquery类库 -->
+        <script type="text/javascript" src="../../js/jquery.min.js"></script>
+        <!-- 引入jquery.easyui类库 -->
+        <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+        <script type="text/javascript" src="../../js/jquery.serializejson.js"></script>
+        <script type="text/javascript" src="../../js/common.js"></script>
+        <script type="text/javascript" src="./js/entryTable.js"></script>
+        <title></title>
+    </head>
+    <body class="easyui-layout">
+        <div data-options="region:'north',split:false" style="height:40px;text-align: center">
+            <form id="queryForm">
+                <table>
+                    <tr>
+                        <td>企业名称：
+                            <input class="easyui-textbox" style="width:200px" name="companyName" id="txt_companyName">
+                        </td>
+                        <td>行业分类：
+                            <input class="easyui-textbox" style="width:200px" name="industryClass" id="txt_industryClass">
+                        </td>
+                        <td>
+                            <a id="btn_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div data-options="region:'center',title:'申请列表'" style="background:#eee;text-align: center">
+            <table id="tbl_entry_detail">
+
+            </table>
+        </div>
+        <div data-options="region:'south',split:false,border:false" style="height:40px;padding: 2px;text-align: right">
+            <a id="btn_addEntry" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a>
+            <a id="btn_editEntry" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
+            <a id="btn_delEntry" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+        </div>
+
+        <div id="dlg_entrySave" class="easyui-dialog" title="增加" style="width:800px;height:500px;" data-options="iconCls:'icon-save',resizable:false,modal:true,buttons:'#dlg_btnsave',closable:false,closed:true">
+            <form id="saveFormPost" method="post">
+                <input type="hidden" name="entryId" id="add_entryId"/>
+                <div style="width: 100%;text-align: center;">
+                    <table style="width: 95%;margin-left: auto;margin-right: auto;margin-top: 50px;" class="datagrid-btable myTable" cellspacing="0" cellpadding="0">
+                        <tr style="vertical-align: middle;">
+                            <td style="width: 20%;text-align:right;">
+                                <label>企业名称:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%">
+                                <input type="text" name="companyName" id="add_companyName" style="width: 223px"
+                                       class="easyui-textbox" data-options="validType:'length[0,20]',required:true"/>
+                            </td>
+                            <td style="width: 20%;text-align:right;">
+                                <label>入驻位置:</label>
+                            </td>
+                            <td style="text-align: left;width: 200px;">
+
+                                <input type="text" name="entryLocation" id="add_entryLocation1" class="easyui-combobox" style="width: 70px" editable="0"
+                                       data-options="validType:'length[0,20]',required:true,valueField:'parkId',textField:'parkName',url:'',method:'GET'"/>
+                                <input type="text" name="entryLocation" id="add_entryLocation2" class="easyui-combobox" style="width:70px" editable="0"
+                                       data-options="validType:'length[0,20]',required:true,valueField:'buildingId',textField:'buildingName',url:'',method:'GET'"/>
+                                <input type="text" name="entryLocation" id="add_entryLocation3" class="easyui-combobox" style="width: 70px" editable="0"
+                                       data-options="validType:'length[0,20]',required:true,valueField:'houseId',textField:'houseCode',url:'',method:'GET'"/>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td style="width: 20%;text-align:right;">
+                                <label>经营活动:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input type="text" name="businessAct" id="add_businessAct" class="easyui-textbox" style="width: 223px"/>
+                            </td>
+
+                            <td style="width: 20%;text-align:right;">
+                                <label>上市情况:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                是：<input class="easyui-radiobutton" name="listingSituation" id="rdo_listingSituation_1" value="1" data-options="checked:true">
+                                否：<input class="easyui-radiobutton" name="listingSituation" id="rdo_listingSituation_0" value="0">
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td style="width: 20%;text-align:right;">
+                                <label>投资来源:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <select id="add_investmentSource" class="easyui-combobox" name="investmentSource" editable="0" style="width:223px;">
+                                    <option>自筹</option>
+                                    <option>引进资金</option>
+                                    <option>政府</option>
+                                    <option>贷款</option>
+                                </select>
+                                <span id="source">    <input type="hidden" name="origin" id="add_origin" class="easyui-textbox" style="width: 223px" placeholder="来源地"/>   </span>
+                            </td>
+                            <td style="width: 20%;text-align:right;">
+                                <label>行业分类:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <select id="add_industryClass" class="easyui-combobox" name="industryClass" editable="0" style="width:223px;">
+                                    <option>新能源</option>
+                                    <option>新材料</option>
+                                    <option>光机电一体化</option>
+                                    <option>生物医药</option>
+                                    <option>电子信息</option>
+                                    <option>跨境电商</option>
+                                    <option>非跨境电商</option>
+                                    <option>其他社会性组织</option>
+                                </select>
+                                <span id="zuzhi">     <input type="hidden" name="other" id="add_other" class="easyui-textbox" style="width: 223px" placeholder="其他社会组织"/></span>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+
+
+                        <tr>
+
+                            <td style="width: 20%;text-align:right;">
+                                <label>登记注册:</label>
+                            </td>
+
+                            <td style="text-align: left;width: 30%;">
+
+                                <select id="add_registerClass" class="easyui-combobox" name="registerClass" editable="0" style="width:223px;">
+                                    <option value="">内资</option>
+                                    <option>港澳台投资</option>
+                                    <option>外商投资</option>
+                                </select>
+                                <span id="login">   <input type="hidden" name="country" id="add_country" class="easyui-textbox" style="width: 223px" placeholder="国家"/>
+                 </span></td>
+                            <td style="width: 20%;text-align:right;">
+                                <label>购地建厂:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <select id="add_buildFactories" class="easyui-combobox" name="buildFactories" editable="0" style="width:223px;">
+                                    <option value="">是</option>
+                                    <option>否</option>
+                                </select>
+                                <span id="buy"> <input type="hidden" name="year" id="add_year" class="easyui-textbox" style="width: 223px" placeholder="购地年份及位置"/>
+                  </span></td>
+
+                        </tr>
+                        <tr>
+
+                            <td style="width: 20%;text-align:right;">
+                                <label>法人:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input type="text" name="legalPerson" id="add_legalPerson" class="easyui-textbox"
+                                       style="width: 223px;"/>
+                            </td>
+
+                            <td style="width: 20%;text-align:right;">
+                                <label>从业人员:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input type="text" name="practioner" id="add_practioner" class="easyui-textbox"
+                                       style="width: 223px"/>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="width: 20%;text-align:right;">
+                                <label>收入及研发:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input type="text" name="incomeResearch" id="add_incomeResearch" class="easyui-textbox"
+                                       style="width: 223px"/>
+                            </td>
+                            <td style="width: 20%;text-align:right;">
+                                <label>固定联系人:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input type="text" name="fixContact" id="add_fixContact" class="easyui-textbox"
+                                       style="width: 223px"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 20%;text-align:right;">
+                                <label>创业者团队构成:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input class="easyui-checkbox" name="registerClass" id="farmer" value="农民" label="农民：">
+                                <input class="easyui-checkbox" name="registerClass" id="student" value="大学生" label="大学生：">
+                                <input class="easyui-checkbox" name="registerClass" id="teacher" value="高校老师" label="高校老师：">
+                                <input class="easyui-checkbox" name="registerClass" id="study" value="留学人员" label="留学人员：">
+                                <input class="easyui-checkbox" name="registerClass" id="oth" value="其他" label="其他：">
+                            </td>
+                            <td style="width: 20%;text-align:right;">
+                                <label>国家级高级技术:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                是：<input class="easyui-radiobutton" name="countryhighTech" id="rdo_countryhighTech_1" value="1" data-options="checked:true">
+                                否：<input class="easyui-radiobutton" name="countryhighTech" id="rdo_countryhighTech_0" value="0">
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </div>
+            </form>
+            <div id="dlg_btnsave" style="width: 100%;text-align: center;">
+                <a id="btn_saveEntry" style="margin: 2px 16px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">确定</a>
+                <a id="btn_cancelEntry" style="margin: 2px 16px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-no'">取消</a>
+            </div>
+
+        </div>
+    </body>
+</html>

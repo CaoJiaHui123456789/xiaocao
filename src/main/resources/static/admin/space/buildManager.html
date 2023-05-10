@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 禁止浏览器使用缓存 -->
+        <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+        <!-- 使用EasyUI的默认风格 -->
+        <link rel="stylesheet" type="text/css" href="../../css/themes/default/easyui.css">
+        <!-- 引入EasyUI的图标 -->
+        <link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="../../css/index.css">
+        <!-- 引入jquery类库 -->
+        <script type="text/javascript" src="../../js/jquery.min.js"></script>
+        <!-- 引入jquery.easyui类库 -->
+        <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+        <script type="text/javascript" src="../../js/jquery.serializejson.js"></script>
+        <script type="text/javascript" src="../../js/common.js"></script>
+        <script type="text/javascript" src="./js/buildManager.js"></script>
+        <title></title>
+    </head>
+    <body class="easyui-layout">
+        <div data-options="region:'north',split:false" style="height:40px;text-align: center">
+            <form id="queryForm">
+                <table>
+                    <tr>
+                        <td>楼宇名称：
+                            <input class="easyui-textbox" style="width:200px" name="buildingName" id="txt_buildingName">
+                        </td><td>建筑面积：
+                            <input class="easyui-textbox" style="width:70px" name="min" id="txt1_buildingArea"  prompt="最小面积">
+                           - <input class="easyui-textbox" style="width:70px" name="max" id="txt2_buildingArea" prompt="最大面积">
+                        </td>
+                        <td>
+                            <a id="btn_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div data-options="region:'center',title:'楼宇列表'" style="background:#eee;text-align: center">
+            <table id="tbl_building_detail">
+
+            </table>
+        </div>
+        <div data-options="region:'south',split:false,border:false" style="height:40px;padding: 2px;text-align: right">
+            <a id="btn_addBuilding" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a>
+            <a id="btn_editBuilding" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
+            <a id="btn_delBuilding" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+        </div>
+
+        <div id="dlg_buildingSave" class="easyui-dialog" title="增加" style="width:600px;height:300px;" data-options="iconCls:'icon-save',resizable:false,modal:true,buttons:'#dlg_btnsave',closable:false,closed:true">
+            <form id="saveFormPost" method="post">
+                <input type="hidden" name="buildingId" id="add_buildingId"/>
+                <input type="hidden" name="parkId" id="txt_parkId" value="1"/>
+
+                <div style="width: 100%;text-align: center;">
+                    <table style="width: 95%;margin-left: auto;margin-right: auto;margin-top: 5px;" class="datagrid-btable myTable" cellspacing="0" cellpadding="0">
+                        <tr style="vertical-align: middle;">
+                    
+                    <!--<td style="width: 20%;text-align:right;">
+                        <label>所属园区:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%;">
+                        <input id="txt_parkId" class="easyui-combobox" name="parkId" style="width: 177px"
+                               data-options="editable:false,valueField:'parkId',textField:'parkName'">
+                    </td>
+                    -->
+                    <td style="width: 20%;text-align:right;">
+                        <label>楼宇名称:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%">
+                        <input type="text" name="buildingName" id="add_buildingName" style="width: 177px"
+                               class="easyui-textbox" data-options="validType:'length[0,20]',required:true"/>
+                    </td>
+                    <td style="width: 20%;text-align:right;">
+                        <label>建筑面积:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%;">
+                        <input type="text" name="buildingArea" id="add_buildingArea" class="easyui-textbox"
+                               style="width: 177px" data-options="validType:'length[0,20]',required:true"/>
+                    </td>
+                </tr>
+                <tr>
+                 <td style="width: 20%;text-align:right;">
+                        <label>户均面积:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%;">
+                        <input type="text" name="avgArea" id="add_avgArea" class="easyui-textbox" style="width: 177px"/>
+                    </td>
+                   
+                    <td style="width: 20%;text-align:right;">
+                        <label>租赁面积:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%;">
+                        <input type="text" name="rentArea" id="add_rentArea" class="easyui-textbox"
+                               style="width: 177px"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="width: 20%;text-align:right;">
+                        <label>公共面积:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%;">
+                        <input type="text" name="publicArea" id="add_publicArea" class="easyui-textbox"
+                               style="width: 177px"/>
+                    </td>
+                    <td style="width: 20%;text-align:right;">
+                        <label>合约面积:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%;">
+                        <input type="text" name="contractArea" id="add_contractArea" class="easyui-textbox"
+                               style="width: 177px"/>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style="width: 20%;text-align:right;">
+                        <label>房源数量:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%;">
+                        <input type="text" name="houseNumber" id="add_houseNumber" class="easyui-textbox"
+                               style="width: 177px"/>
+                    </td>
+                    <td style="width: 20%;text-align:right;">
+                        <label>客户数量:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%;">
+                        <input type="text" name="cusNumber" id="add_cusNumber" class="easyui-textbox"
+                               style="width: 177px;"/>
+                    </td>
+                </tr>
+
+                <tr>
+                <td style="width: 20%;text-align:right;">
+                        <label>楼宇层数:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%;">
+                        <input type="text" name="floorNumber" id="add_floorNumber" class="easyui-textbox"
+                               style="width: 177px"/>
+                    </td>
+                    
+                </tr>
+
+            </table>
+
+                   
+                </div>
+            </form>
+            <div id="dlg_btnsave" style="width: 100%;text-align: center;">
+                <a id="btn_saveBuilding" style="margin: 2px 16px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">确定</a>
+                <a id="btn_cancelBuilding" style="margin: 2px 16px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-no'">取消</a>
+            </div>
+
+        </div>
+    </body>
+</html>

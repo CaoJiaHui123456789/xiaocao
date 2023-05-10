@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 禁止浏览器使用缓存 -->
+        <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+        <!-- 使用EasyUI的默认风格 -->
+        <link rel="stylesheet" type="text/css" href="../../css/themes/default/easyui.css">
+        <!-- 引入EasyUI的图标 -->
+        <link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="../../css/index.css">
+        <!-- 引入jquery类库 -->
+        <script type="text/javascript" src="../../js/jquery.min.js"></script>
+        <!-- 引入jquery.easyui类库 -->
+        <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+        <script type="text/javascript" src="../../js/jquery.serializejson.js"></script>
+        <script type="text/javascript" src="../../js/common.js"></script>
+        <script type="text/javascript" src="js/houseManager.js"></script>
+    </head>
+    <body class="easyui-layout">
+        <div data-options="region:'north',split:false" style="height:40px;">
+            <form id="queryForm">
+                <table>
+                    <tr>
+                        <td>房间编号：
+                            <input class="easyui-textbox" style="width:200px" name="houseCode" id="txt_houseCode">
+                        </td>
+                        <td>交付状态:
+                            <td>
+                                <select  class="easyui-combobox" editable="0" style="width:200px;" name="payStatus">
+                                    <option id="rdo_search_spayStatus_all" value="">全部</option>
+                                    <option id="rdo_search_payStatus_yes" value="1" data-options="checked:true">已交付</option>
+                                    <option id="rdo_search_spayStatus_no" value="0">未交付</option>
+                                </select>
+                            </td>
+                        </td>
+                        <td>
+                            <a id="btn_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div data-options="region:'center',title:'房间列表'" style="background:#eee;text-align: center">
+            <table id="tbl_syshouse_detail">
+
+            </table>
+        </div>
+        <div data-options="region:'south',split:false,border:false" style="height:40px;padding: 2px;text-align: right">
+            <a id="btn_addsyshouse" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a>
+            <a id="btn_editsyshouse" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
+            <a id="btn_delsyshouse" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+        </div>
+
+        <div id="dlg_syshouseSave" class="easyui-dialog" title="增加" style="width:600px;height:350px;"
+             data-options="iconCls:'icon-save',resizable:false,modal:true,buttons:'#dlg_btnsave',closable:false,closed:true">
+            <form id="saveFormPost" method="post">
+                <input type="hidden" name="houseId" id="add_houseId"/>
+                <div style="width: 100%;text-align: center;">
+                    <table style="width: 95%;margin-left: auto;margin-right: auto;margin-top: 20px;"
+                           class="datagrid-btable myTable" cellspacing="0" cellpadding="0">
+                        <tr style="vertical-align: middle;">
+
+                            <td style="width: 20%;text-align:right;">
+                                <label>楼栋名称:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%">
+                                <input type="text" id="txt_buildingId" name="buildingId" style="width: 177px"
+                                       class="easyui-combobox" data-options="editable:false,valueField:'buildingId',textField:'buildingName',required:true">
+                            </td>
+
+                            <td style="width: 20%;text-align:right;">
+                                <label>房间编号:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%">
+
+                                <input type="text" name="houseCode" id="add_syshouseCode" style="width: 177px"
+                                       class="easyui-textbox" data-options="validType:'length[0,20]',required:true"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20%;text-align:right;">
+                                <label>房间状态:</label>
+                            </td>
+                            <td>
+                                <select id="add_houseStatus" class="easyui-combobox" name="houseStatus" editable="0" style="width:177px;">
+                                    <option value="闲置">闲置</option>
+                                    <option>已出售</option>
+                                    <option>已出租</option>
+                                </select>
+                            </td>
+                            <td style="width: 20%;text-align:right;">
+                                <label>房间类型:</label>
+                            </td>
+
+                            <td style="text-align: left;width: 30%;">
+                                <select id="add_houseType" class="easyui-combobox" name="houseType" editable="0" style="width:177px;">
+                                    <option value="办公室">办公室</option>
+                                    <option>写字楼</option>
+                                    <option>住宅</option>
+                                    <option>公司包办</option>
+                                    <option></option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 20%;text-align:right;">
+                                <label>房间价格:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input type="text" name="housePrice" id="add_housePrice" class="easyui-textbox" style="width: 177px"/>
+                            </td>
+                            <td style="width: 20%;text-align:right;">
+                                <label>交付状态:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                已交付：
+                                <input class="easyui-radiobutton" name="payStatus" id="rdo_payStatus_yes" value="1" data-options="checked:true">
+                                未交付：
+                                <input class="easyui-radiobutton" name="payStatus" id="rdo_spayStatus_no" value="0">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 20%;text-align:right;">
+                                <label>租赁面积:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input type="text" name="areaRent" id="add_areaRent" class="easyui-textbox" style="width: 177px"/>
+                            </td>
+
+                            <td style="width: 20%;text-align:right;">
+                                <label>基准单价:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input type="text" name="basePrice" id="add_basePrice" class="easyui-textbox" style="width: 177px"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 20%;text-align:right;">
+                                <label>交付标准:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <select id="add_payStandard" class="easyui-combobox" name="payStandard" editable="0" style="width:177px;">
+                                    <option value="豪华装修">豪华装修</option>
+                                    <option>精装修</option>
+                                    <option>简装</option>
+                                    <option>毛坯</option>
+                                </select>
+                            </td>
+                            <td style="width: 20%;text-align:right;">
+                                <label>月收金额:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input type="text" name="tollMoney" id="add_tollMoney" class="easyui-textbox" style="width: 177px"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 20%;text-align:right;">
+                                <label>空调单价:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <input type="text" name="aircondPrice" id="add_aircondPrice" class="easyui-textbox" style="width: 177px"/>
+                            </td>
+
+                            <td style="width: 20%;text-align:right;">
+                                <label>空调收费模式:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%;">
+                                <select id="add_aircondTollmode" class="easyui-combobox" name="aircondTollmode" editable="0" style="width:177px;">
+                                    <option value="按流通量">按流通量</option>
+                                    <option>按面积</option>
+                                    <option>按月</option>
+                                    <option>按年</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <!--  <td style="width: 20%;text-align:right;">
+                                    <label>客户信息:</label>
+                                </td>
+                                <td style="text-align: left;width: 30%;">
+                                    <input type="text" name="custom" id="add_custom" class="easyui-textbox" style="width: 177px"/>
+                                </td>   -->
+                            <td style="width: 20%;text-align:right;">
+                                <label>户型图片:</label>
+                            </td>
+                            <td style="text-align: left;width: 30%">
+                                <input type="text" id="txt_adId" name="adId" style="width: 177px" class="easyui-combobox" data-options="editable:false,valueField:'adId',textField:'adCode',required:true">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+            <div id="dlg_btnsave" style="width: 100%;text-align: center;">
+                <a id="btn_savesyshouse" style="margin: 2px 16px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">确定</a>
+                <a id="btn_cancelsyshouse" style="margin: 2px 16px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-no'">取消</a>
+            </div>
+            <div id="dlg_showimg" class="easyui-dialog" title="图片详情" style="width:1200px"
+                 data-options="resizable:true,closed:true,modal:true">
+                <img src="" id="showimg" style="width: 100%"/>
+            </div>
+
+        </div>
+    </body>
+</html>

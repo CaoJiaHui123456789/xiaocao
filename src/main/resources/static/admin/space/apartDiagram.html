@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<heaptDiagram>
+ <meta charset="UTF-8">
+    <!-- 禁止浏览器使用缓存 -->
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <!-- 使用EasyUI的默认风格 -->
+    <link rel="stylesheet" type="text/css" href="../../css/themes/default/easyui.css">
+    <!-- 引入EasyUI的图标 -->
+    <link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+    <!-- 引入jquery类库 -->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <!-- 引入jquery.easyui类库 -->
+    <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../../js/jquery.serializejson.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="js/apartDiagram.js"></script>
+    
+    
+<title>Insert title here</title>
+</heaptDiagram>
+<body class="easyui-layout">
+	<div data-options="region:'north',split:false" style="height:40px;">
+	
+	
+	<form id="queryForm">
+		<table>
+			<tr>
+				<td>户型编号：<input class="easyui-textbox" style="width:200px" name="adCode" id="txt_aptDiagramName"></td>
+				<td><a id="btn_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a></td>
+			</tr>
+		</table>
+	</form>
+	
+	
+	</div>
+    <div data-options="region:'center',title:'户型图管理'" style="background:#eee;">
+    	<table id="tbl_aptDiagram_detail">
+   				
+		</table>
+    </div>
+    
+    <div data-options="region:'south',split:false,border:false" style="height:40px;paptDiagramding: 2px;text-align: right">
+		<a id="btn_saveAptDiagram" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-aptDiagramd'">增加</a>
+		<a id="btn_editAptDiagram" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
+		<a id="btn_delAptDiagram" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+	</div>
+	
+	<div id="dlg_aptDiagramSave" class="easyui-dialog" title="增加" style="width:700px;height:300px;"
+    	data-options="iconCls:'icon-save',resizable:false,modal:true,buttons:'#dlg_btnsave',closable:false,closed:true">
+    	<form id="form_importphoto" method="post" enctype="multipart/form-data">
+    				
+    			<table style="width: 90%;margin-left: auto;margin-right: auto;margin-top: 20px;" class="datagrid-btable myTable" cellspacing="0" cellpaptDiagramding="0">
+    				<tr style="vertical-align: middle;">
+    					<td style="text-align: right;width: 20%">
+    						<input type="hidden" name="adId"  id="add_adId" class="easyui-textbox"/>
+    						<label>户型面积:</label>
+							
+    					</td>
+    					<td>
+    						<input type="text" name="area"  id="add_area" style="width: 192px" class="easyui-textbox" data-options="validType:'length[0,20]'"/>
+    					</td>
+    					
+    					<td style="text-align: right;width: 20%">
+    						<label >户型格局:</label>
+							
+    					</td>
+    					<td>
+    						<input type="text" name="pattern"  id="add_pattern" style="width: 192px" class="easyui-textbox" data-options="validType:'length[0,20]'"/>
+    					</td>
+    				</tr>
+    				<tr style="vertical-align: middle;">	
+    					<td style="text-align: right;width: 20%">
+    						<label >户型朝向:</label>
+							
+    					</td>
+    					<td>
+    						<input type="text" name="toward"  id="add_toward" style="width: 192px" class="easyui-textbox" data-options="validType:'length[0,20]'"/>
+    					</td>
+    					<td style="text-align: right;width: 20%">
+    						<label >所属园区:</label>
+							
+    					</td>
+    					<td>
+    						<input id="txt_parkId" class="easyui-combobox" name="parkId" style="width:192px"
+                               data-options="editable:false,valueField:'parkId',textField:'parkName'">
+    					</td>
+    				</tr>
+    				<tr style="vertical-align: middle;">
+    					<td style="text-align: right;width: 20%">
+    						<label >所属楼栋:</label>
+    					</td>
+    					<td>
+    				
+    					<input id="add_building" class="easyui-combobox" name="buildingId" style="width:192px"
+                               data-options="editable:false,valueField:'buildingId',textField:'buildingName'">
+    		
+    					</td>
+    					
+    					<td style="text-align: right;width: 20%">
+    						<label >户型代码:</label>
+							
+    					</td>
+    					<td>
+    					<input type="text" name="adCode"  id="add_adCode" style="width: 192px" class="easyui-textbox" data-options="validType:'length[0,20]'"/>
+    					</td>
+    				</tr>
+    				
+    				<tr style="vertical-align: middle;">
+    					<td style="text-align: right;width: 20%">
+    						<label >户型图片:</label>
+    					</td>
+    					<td style="text-align: left;width: 20%" colspan="3">
+    					<input id="filebox_importphoto" class="easyui-filebox" name="file"  data-options="buttonText:'选择户型图',accept:'.jpg'"
+    					 style="width:460px;vertical-align: middle;margin-top:10px;float:left; marign-left:50%;"/>
+    					</td>
+    				</tr>
+    			</table>	
+
+    	</form>
+		<div id="dlg_btnsave" style="width: 100%;text-align: center;">
+			<a id="btn_firmAptDiagram" style="margin: 2px 16px;" 	href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">确定</a>
+			<a id="btn_cancelAptDiagram" style="margin: 2px 16px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-no'">取消</a>
+		</div>
+	</div>
+</body>
+</html>

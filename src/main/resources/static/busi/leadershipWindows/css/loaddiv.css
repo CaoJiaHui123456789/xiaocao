@@ -1,0 +1,12 @@
+.listframe{
+    position:relative;width: 924px;height: 263px;
+}
+.loadframe{
+    position:absolute;
+    z-index: 2;
+    width: 924px;
+    height: 263px;
+}
+.i_p_list{
+    position:absolute;z-index: 1
+}

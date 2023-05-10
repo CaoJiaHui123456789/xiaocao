@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+        <!-- 禁止浏览器使用缓存 -->
+        <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+        <!-- 使用EasyUI的默认风格 -->
+        <link rel="stylesheet" type="text/css" href="../../css/themes/default/easyui.css">
+        <!-- 引入EasyUI的图标 -->
+        <link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="../../css/index.css">
+        <!-- 引入jquery类库 -->
+        <script type="text/javascript" src="../../js/jquery.min.js"></script>
+        <!-- 引入jquery.easyui类库 -->
+        <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+        <script type="text/javascript" src="../../js/jquery.serializejson.js"></script>
+        <script type="text/javascript" src="../../js/common.js"></script>
+        <script type="text/javascript" src="./js/userManager.js"></script>
+	<title></title>
+</head>
+<body class="easyui-layout">
+	<div data-options="region:'north',split:false" style="height:40px;">
+	<form id="queryForm">
+		<table>
+			<tr>
+			    <td>员工编号：<input class="easyui-textbox" style="width:200px" name="userCode" id="txt_userCode"></td>
+				<td>员工姓名：<input class="easyui-textbox" style="width:200px" name="userName" id="txt_userName"></td>
+				<td><a id="btn_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+	</div>
+    <div data-options="region:'center',title:'部门列表'" style="background:#eee;">
+    	<table id="tbl_user_detail">
+    	
+		</table>
+    </div>
+    <div data-options="region:'south',split:false,border:false" style="height:40px;padding: 2px;text-align: right">
+		<a id="btn_addUser" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a>
+		<a id="btn_editUser" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
+		<a id="btn_delUser" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+	</div>
+	
+	<div id="dlg_userSave" class="easyui-dialog" title="增加" style="width:700px;height:320px;"
+    	data-options="iconCls:'icon-save',resizable:false,modal:true,buttons:'#dlg_btnsave',closable:false,closed:true">
+    	<form id="saveFormPost" method="post">
+    	<input type="hidden" name="userId"  id="add_userId"/>
+    	<div style="width: 100%;text-align: center;">
+			<table style="width: 95%;margin-left: auto;margin-right: auto;margin-top: 20px;" class="datagrid-btable myTable" cellspacing="0" cellpadding="0">
+				<tr style="vertical-align: middle;">
+					<td style="width: 20%; text-align:right;">
+						<label >员工编号:</label>
+					</td>
+					<td style="text-align: left;width: 30%">
+						<input type="text" name="userCode"  id="add_userCode" style="width: 195px" class="easyui-textbox" data-options="validType:'length[0,10]',required:true"/>
+					</td>
+					<td style="width: 20%;text-align:right;">
+						<label >员工姓名:</label>
+					</td>
+					<td style="text-align: left;width: 30%">
+						<input type="text" name="userName"  id="add_userName" style="width: 195px" class="easyui-textbox" data-options="validType:'length[0,20]',required:true"/>
+					</td>
+				</tr>
+				
+				<tr style="vertical-align: middle;">
+					<td style="width: 20%;text-align:right;">
+						<label >员工密码:</label>
+					</td>
+					<td style="text-align: left;width: 30%">
+						<input type="text" name="userPass"  id="add_userPass" style="width: 195px" class="easyui-textbox" data-options="validType:'length[0,10]',required:true"/>
+					</td>
+					<td style="width: 20%;text-align:right;">
+						<label >员工性别:</label>
+					</td>
+					<td style="text-align: left;width: 30%;">
+						男：<input class="easyui-radiobutton" name="userSex" id="rdo_userSex_man" value="1"  data-options="checked:true">
+						女：<input class="easyui-radiobutton" name="userSex" id="rdo_userSex_wman"value="0">
+					</td>
+				</tr>
+				
+				<tr style="vertical-align: middle;">
+					<td style="width: 20%;text-align:right;">
+						<label >员工生日:</label>
+					</td>
+					<td style="text-align: left;width: 30%">
+						<input type="text" name="birthday"  id="add_birthday" style="width: 195px" class="easyui-datebox"  /> 
+					</td>
+					<td style="width: 20%;text-align:right;">
+						<label >入职时间:</label>
+					</td>
+					<td style="text-align: left;width: 30%">
+						<input type="text" name="entryDay"  id="add_entryDay" style="width: 195px" class="easyui-datebox"  /> 
+					</td>
+				</tr>
+				
+				<tr>
+					<td style="width: 20%;text-align:right;">
+						<label >职务名称:</label>
+					</td>
+					<td style="text-align: left;width: 30%;">
+						<input type="text" name="poster"  id="add_poster" class="easyui-textbox" style="width: 195px"/>
+					</td>
+			
+			       <td style="width: 20%;text-align:right;">
+						<label >所属部门:</label>
+					</td>
+					<td style="text-align: left;width: 30%;">
+                        <input id="txt_deptId" class="easyui-combobox" name="deptId" style="width: 195px"
+                               data-options="editable:false,valueField:'deptId',textField:'deptName'">
+                    </td>
+				</tr>	
+								
+				<tr>
+					<td style="width: 20%;text-align:right;">
+						<label >员工住址:</label>
+					</td>
+					<td style="text-align: left;width: 30%;">
+						<input type="text" name="address"  id="add_address" class="easyui-textbox" style="width: 195px"/>
+					</td>
+			
+			       <td style="width: 20%;text-align:right;">
+						<label >员工电话:</label>
+					</td>
+					<td style="text-align: left;width: 30%;">
+						<input type="text" name="userPhone"  id="add_userPhone" class="easyui-textbox" style="width: 195px"/>
+					</td>
+				</tr>
+								
+			</table>
+		 </div>
+		</form>
+		<div id="dlg_btnsave" style="width: 100%;text-align: center;">
+			<a id="btn_saveUser" style="margin: 2px 16px;" 	href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">确定</a>
+			<a id="btn_cancelUser" style="margin: 2px 16px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-no'">取消</a>
+		</div>
+	</div>
+</body>
+</html>

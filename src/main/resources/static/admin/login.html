@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+
+	<link rel="stylesheet" type="text/css" href="../css/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../css/themes/icon.css">
+    <link rel="shortcut icon" href="../css/themes/icons/man.ico" >
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+
+<title></title>
+<style type="text/css">
+.a{
+    background-color: blue; 
+    border-color: #d58512;
+    border-radius:3px;
+    box-shadow:none;
+    border:1px solid transparent;
+    color:#fff;
+    cursor:pointer;
+    touch-action:manipulation;
+    height:55px;
+    width:110%;
+}
+.b{
+   color:blue;
+   text-align:center;
+
+}
+body{
+	background-repeat:no-repeat;
+	background-size:100% 90%;
+	background-attachment:fixed;
+	
+}
+</style>
+</head>
+<body background="../img/loginbg.png" style="">
+	
+	
+	<div style="width:35%;height:50%;right:140px;bottom:160px;position:absolute;">
+	
+		<h1 class="b">智慧园区管理平台</h1>	
+
+		<hr color="black" align="right">
+		<table class="formTbl"  style="text-align:right; width:90%">
+				
+					<tr style="vertical-align:botton;width: 200%; height:80px;">
+						<td style="text-align: right; width: 20%">
+						<img src="../img/ren.png" style="width:50px;height:45px">
+						</td>
+						<td style="text-align: left; padding-bottom:4px;width: 130%;">
+							<input type="text" style="height:40px;width:100%" id="txt_userCode" class="easyui-textbox" name="userCode" prompt="请输入用户名" />
+						</td>
+					</tr>
+					
+					<tr style="vertical-align: bottom;width: 500%;height:60px;">
+						<td style="text-align: right; width: 20%"">
+						<img  id="lock" style="width:50px;height:40px" src="../img/suo.png"  >
+						</td>
+						<td style="text-align: left; ;padding-bottom:4px;width: 120%;">
+						<input type="password" style="height:40px;width:100%;" class="easyui-textbox" id="txt_userPass" name="userPass" prompt="请输入用户密码"/>
+						</td>
+					</tr>
+					
+			
+					
+					<tr style="vertical-align: bottom;width:300%;height:40px;">
+						<td colspan="2" style="text-align: center;height: 40px;">
+							<div   style="width:110%;height:50%;text-align: center">
+								<font color="blue" id="mess">忘记密码</font>
+							</div>						
+						</td>
+					</tr>
+					<tr style="vertical-align: bottom;width: 300%;height:40px;">
+						<td colspan="2" style="text-align: center;height: 40px;">
+							<div id="login_click"><button type="submit" class="a" id="btlogin">登 录</button></div>								
+						</td>
+					</tr>
+				</table>	
+	</div>
+	
+	<div style="width:450px;height:20px;left:40px;bottom:45px;position:absolute;">
+	<h3>制作：黑龙江财经学院</h3>
+	</div>
+	
+</body>
+</html>

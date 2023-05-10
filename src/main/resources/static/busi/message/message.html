@@ -1,0 +1,64 @@
+
+<html>
+<head>
+<title></title>
+<script src="public/js/href.js"></script>
+</head>
+<body>
+<div class="width1004 ab_d1">
+  <div class="indexcontent">
+    <div class="n_weizhi">
+      <div class="txt"> 您的位置: <a link="index.html">首页</a>  <a>在线留言</a> </div>
+    </div>
+    <ul class="n_nav1">
+      
+      <div class="clear"></div>
+    </ul>
+    <div class="clear" style="height:30px;"></div>
+    <div class="i_title1">在线<span>留言</span></div>
+    <img class="i_title_img" src="public/image/图标6.png">
+    <div class="clear" style="height:40px;"></div>
+    <div class="message_d1">
+      <div class="zs_ms wow fadeInLeft" data-wow-delay="0.3s">
+        <form action="/k396/?message/" method="post">
+          <input class="zs_ms_inp1" style=" float:left; width:240px;" type="text" name="contacts" id="name" value="" placeholder="您的称呼">
+          <div class="zs_ms_txt1">您的性别</div>
+          <input type="hidden" name="sex" id="zs_sex" value="">
+          <div class="xingbie" lang="男士">男士</div>
+          <div class="xingbie" lang="女士">女士</div>
+          <div class="clear" style="height:15px;"></div>
+          <input class="zs_ms_inp1" type="text" name="mobile" id="tel" value="" placeholder="您的手机">
+          <div class="clear" style="height:15px;"></div>
+          <input class="zs_ms_inp1" type="text" name="email" id="zs_email" value="" placeholder="您的邮箱">
+          <div class="clear" style="height:15px;"></div>
+          <input class="prov zs_ms_inp1" style="float:left;width:235px;" type="text" name="sheng" id="province" value="" placeholder="省份">
+          <input class="city zs_ms_inp1" style="float:right;width:235px;" type="text" name="chengshi" id="city" value="" placeholder="城市">
+          <div class="clear" style="height:15px;"></div>
+          <textarea class="zs_ms_textarea" name="content" id="zs_content" placeholder="您的留言"></textarea>
+          <div class="clear" style="height:48px;"></div>
+          <input type="submit" style="cursor:pointer;" class="zs_ms_bt1 feedback_submit2" name="bt1" value="立即提交" id="tj">
+        </form>
+        <script type="text/javascript">
+                    $(".xingbie").click(function(){
+                        $(".xingbie").removeClass("on");
+                        $(this).addClass("on");
+                        $("#zs_sex").val($(this).attr('lang'));
+                      });
+                </script> 
+      </div>
+      <img class="message_img wow fadeInRight" data-wow-delay="0.3s" src="public/picture/在线留言.jpg" width="553">
+      <div class="clear"></div>
+    </div>
+    <div class="clear" style="height:65px;"></div>
+  </div>
+</div>
+<div class="clear"></div>
+<script type="text/javascript" src="message/js/message.js"></script>
+<link href="public/css/animate.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="public/js/wow.min.js"></script>
+
+<script src="public/js/indexcontext.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 禁止浏览器使用缓存 -->
+        <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+        <!-- 使用EasyUI的默认风格 -->
+        <link rel="stylesheet" type="text/css" href="../../css/themes/default/easyui.css">
+        <!-- 引入EasyUI的图标 -->
+        <link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="../../css/index.css">
+        <link rel="stylesheet" type="text/css" href="../../js/kindeditor/themes/default/default.css">
+
+        
+        
+    </head>
+    <body class="easyui-layout">
+        <div data-options="region:'north',split:false" style="height:40px;text-align: center">
+            <form id="queryForm">
+                <table>
+                    <tr>
+                        <td>等级查找：
+                            <input class="easyui-textbox" style="width:200px" name="newsName" id="txt_newsName">
+                        </td>
+                        <td>
+                            <a id="btn_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+        
+        <div data-options="region:'center',title:'新闻板块'" style="background:#eee;text-align: center">
+            <table id="tbl_Cont_detail">
+
+            </table>
+        </div>
+        
+        <div id="p" class="easyui-panel" title="My Panel"
+		    style="width:500px;height:150px;padding:10px;background:#fafafa;"
+		    data-options="iconCls:'icon-save'">
+		    <p>panel content.</p>
+		    <p>panel content.</p>
+		</div>
+		
+		
+      <div data-options="region:'south',split:false,border:false" style="height:60px;padding: 2px;text-align: right" >
+            <a id="btn_preview" href="#" style="margin: 10px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >预览</a>
+            <a id="btn_addCont" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a>
+            <a id="btn_editCont" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
+            <a id="btn_delCont" href="#" style="margin: 2px 4px" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+        </div>
+        
+
+        <div id="dlg_ContSave" class="easyui-dialog" title="增加" style="width:80%;height:90%;" data-options="iconCls:'icon-save',resizable:false,modal:true,buttons:'#dlg_btnsave',closable:false,closed:true">
+            
+                <input type="hidden" name="newcontId" id="add_newcontId"/>
+
+                <div style="width: 100%;text-align: center;">
+                    <form id="form_importphoto" method="post" enctype="multipart/form-data">	
+                    <table style="width: 95%;margin-left: auto;margin-right: auto;margin-top: 10px;" class="datagrid-btable myTable" cellspacing="0" cellpadding="0">
+                        <tr style="vertical-align: middle;">
+                    
+                    
+                    <td style="width: 20%;text-align:right;">
+                        <label>新闻标题:</label>
+                    </td>
+                    
+                    <td style="text-align: left;width: 30%">
+                       <input type="text"
+							name="newsName" id="add_newsName" class="easyui-textbox"
+							style="width: 177px"/>
+                    </td>
+                    
+                    
+                    <td style="width: 20%;text-align:right;">
+                        <label>新闻模块:</label>
+                    </td>
+                    <td style="text-align: left;width: 30%;">
+                        <input id="add_newsTable" class="easyui-combobox" name="newsId" style="width:177px"
+                               data-options="editable:false,valueField:'newsId',textField:'newsHead'">
+                    </td>
+                </tr>
+              
+                
+                <tr>
+                	<td style="width: 20%; text-align: right;"><label>副 标 题:</label></td>
+					
+					<td style="width: 20%; text-align: left;">
+						<input id="add_subtitleName" class="easyui-textbox" name="subtitleName" style="width:177px">
+					</td>
+                 	
+					<td style="width: 20%; text-align: right;"><label>封面图片:</label></td>
+					<td style="width: 20%; text-align: left;">
+						<input id="add_file" name="file" class="easyui-filebox" style="width:177px" data-options="buttonText:'选择图片'">
+					</td>
+					
+           	   </tr>
+           	   <tr>
+	           	   	<td style="width: 20%; text-align: right;"><label>新闻来源:</label></td>
+						
+						<td style="width: 20%; text-align: left;">
+							<input id="add_source" class="easyui-textbox" name="source" style="width:177px">
+						</td>
+	           	   	<td style="width: 20%; text-align: right;"><label>是否推荐:</label></td>
+						
+						<td style="width: 20%; text-align: left;">	
+	                    	<input class="easyui-switchbutton" data-options="onText:'是',offText:'否'" name="recommend">
+						</td>
+           	   </tr>
+                
+                
+            </table>
+            </form>
+                </div>
+                
+               <div style="width:80%;height:600px;margin-top:10px;margin-left:10%;">
+	            <textarea id="editor_id" name="content" style="width:100%;height:600px;">
+			          
+			    </textarea>
+           	  </div>
+              
+            <div id="dlg_btnsave" style="width: 100%;text-align: center;">
+                <a id="btn_saveCont" style="margin: 2px 16px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">确定</a>
+                <a id="btn_cancelCont" style="margin: 2px 16px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-no'">取消</a>
+            </div>
+            
+            
+        </div>
+        
+        
+        
+    </body>
+    <!-- 引入jquery类库 -->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.serializejson.js"></script>
+    <!-- 引入jquery.easyui类库 -->
+    <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../../js/kindeditor/kindeditor-all.js"></script>
+    <script type="text/javascript" src="../../js/kindeditor/lang/zh-CN.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="./js/newsCont.js"></script>
+  
+    <script>
+    
+    </script>    
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+        <link rel="stylesheet" type="text/css" href="../css/themes/bootstrap/easyui.css">
+        <link rel="stylesheet" type="text/css" href="../css/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="../css/index.css">
+        <link rel="shortcut icon" href="../css/themes/icons/man.ico">
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../js/common.js"></script>
+        <script type="text/javascript" src="./js/index.js"></script>
+        <title>产业园区管理</title>
+    </head>
+<body class="easyui-layout">
+<div data-options="region:'north',border:false" style="height:55px;padding:0px;overflow: hidden">
+    <div id="headerLogo01">
+        <img alt="" src="../img/logo.png" style="height:55px;width:100%">
+    </div>
+</div>
+<div data-options="region:'west',split:false,title:''" style="width:200px;padding:0px;overflow: hidden;">
+    <div class="easyui-accordion" data-options="multiple:false,selected:false" style="width:200px;" id="accordion_div">
+     <div title="人力资源" style="overflow:auto;padding:0px;" data-link="">
+            <ul class="container">
+                <li class="dropdown">
+                    <ul class="dropdown-menu show">
+                        <li>
+                            <a href="#" data-parent="员工管理"
+                               data-link="/static/admin/sethr/userManager.html">员工管理</a>
+                        </li>
+                        <li>
+                            <a href="#" data-parent="部门管理"
+                               data-link="/static/admin/sethr/deptManager.html">部门管理</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div title="空间管理" style="overflow:auto;padding:0px;" data-link="">
+            <ul class="container">
+                <li class="dropdown">
+                    <ul class="dropdown-menu show">
+                        <li>
+                            <a href="#" data-parent="园区管理"
+                               data-link="/static/admin/space/parkManager.html">园区管理</a>
+                        </li>
+                        <li>
+                            <a href="#" data-parent="楼宇管理"
+                               data-link="/static/admin/space/buildManager.html">楼宇管理</a>
+                        </li>
+                        <li>
+                            <a href="#" data-parent="房屋管理" data-link="/static/admin/space/houseManager.html">房屋管理</a>
+                        </li>
+                        
+                        <li>
+                            <a href="#" data-parent="户型图管理" data-link="/static/admin/space/ApartDiagram.html">户型图管理</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div title="客户管理" style="overflow:auto;padding:0px;" data-link="">
+            <ul class="container">
+                <li class="dropdown">
+                    <ul class="dropdown-menu show">
+                        <li>
+                            <a href="#" data-parent="入驻管理"
+                               data-link="/static/admin/customer/entryTable.html">入驻管理</a>
+                        </li>       
+                    </ul>
+                </li>
+            </ul>
+        </div>
+          <div title="设置选项" style="overflow:auto;padding:0px;" data-link="">
+            <ul class="container">
+                <li class="dropdown">
+                    <ul class="dropdown-menu show">
+                        <li>
+                            <a href="#" data-parent="首页轮播图展示设置"
+                               data-link="/static/admin/setUp/indexSwiper.html">首页轮播图展示设置</a>
+                        </li>
+                        <li>
+                            <a href="#" data-parent="新闻板块设置"
+                               data-link="/static/admin/setUp/newsTable.html">新闻板块设置</a>
+                        </li>
+                         <li>
+                            <a href="#" data-parent="新闻内容设置"
+                               data-link="/static/admin/setUp/newsCont.html">新闻内容设置</a>
+                        </li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div title="退出" style="padding:0px;" data-options="collapsible:false">
+        </div>
+    </div>
+</div>
+<div data-options="region:'south',border:true" style="height:25px;background:#FFFFFF;padding:1px;">
+    开发者：XXXXXXX
+</div>
+<div data-options="region:'center',title:'首页',border:false" id="main_display" style="overflow:hidden; ">
+    <iframe id="main_frame" style="width:100%;height:100%;border:none;overflow:hidden;"></iframe>
+</div>
+</body>
+</html>

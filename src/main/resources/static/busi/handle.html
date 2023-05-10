@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" cxcontent="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="./entryIn.css">  
+    <link rel="stylesheet" type="text/css" href="../css/selector.css"> 
+    <!-- 引入jquery类库 -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!-- 引入jquery.easyui类库 -->
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../js/jquery.serializejson.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="./entryIn.js"></script>
+    <script type="text/javascript" src="../js/selector.js"></script>
+
+</head>
+<body>
+    
+<div class="spacer"></div>
+<div class="wrapper">
+  <form id="formK">
+
+
+  
+  <div class="spacer spacer--small"></div>
+  <div class="card">
+    <div class="card__body">
+      <div class="kudos">
+        <div class="kudos__title">申请信息表</div>
+        <div class="grid">
+          <div class="grid__item grid__item--half">
+            <div class="form-element">
+              <label class="form-element__label" for="kudosFrom">企业名称:</label>
+              <input class="form-element__input" id="kudosFrom" type="text" placeholder="请输入企业名称"/><small class="form-element__help">Sorry, this is required</small>
+            </div>
+          </div>
+          <div class="grid__item grid__item--half">
+           
+          </div>
+        </div>
+
+         <div class="grid">
+          <div class="grid__item grid__item--half">
+
+            <label class="form-element__label" for="kudosTo">入驻楼宇:</label>
+            <select  class="form-element__input" id="building">
+              <option>Sketch</option>
+              <option selected>Framer X</option>
+              <option>Photoshop</option>
+              <option>Principle</option>
+              <option>Invision</option>
+            </select>
+
+            
+            <label class="form-element__label" for="kudosTo">入驻房屋:</label>
+            <select multiple data-placeholder="Add tools" id="house">
+              <option>Sketch</option>
+              <option selected>Framer X</option>
+              <option>Photoshop</option>
+              <option>Principle</option>
+              <option>Invision</option>
+            </select>
+          
+          <!-- dribbble -->
+          
+          </div>
+            
+        </div> 
+
+
+        <div class="grid">
+          <div class="grid__item grid__item--half">
+            <div class="form-element">
+              <label class="form-element__label" for="kudosFrom">主要经营活动1:</label>
+              <input class="form-element__input" id="kudosFrom" type="text" placeholder="按照实际经营收入来源依次填写"/><small class="form-element__help">Sorry, this is required</small>
+            </div>
+          </div>
+          <div class="grid__item grid__item--half">
+            <div class="form-element">
+              <label class="form-element__label" for="kudosTo">主要经营活动2</label>
+              <input class="form-element__input" id="kudosTo" type="text" placeholder="按照实际经营收入来源依次填写"/><small class="form-element__help">Sorry, this is required</small>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="grid">
+            <div class="grid__item grid__item--half">
+              <div class="form-element">
+                <label class="form-element__label" >投资来源:</label>
+
+                <select class="form-element__input" id="selectResouce">
+                    
+                    <option>自筹</option>
+                    
+                    <option>政府</option>
+                    
+                    <option>引进资金</option>
+
+                    <option>贷款</option>
+ 
+                </select>
+              </div>
+            </div>
+            <div class="grid__item grid__item--half">
+              <div class="form-element" id="resouceArea" >
+                <label class="form-element__label"  id="resouceAreaLabel" style="display: none;">来源地</label>
+                <input class="form-element__input"  id="resouceAreaInput" style="visibility: hidden;" placeholder="Which team member is this kudos for?"/><small class="form-element__help">Sorry, this is required</small>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="grid">
+            <div class="grid__item grid__item--half">
+              <div class="form-element">
+                <label class="form-element__label" for="kudosFrom">行业分类:</label>
+                <select class="form-element__input" id="selectResouce">
+                  <option></option>                    
+                  <option>新能源</option>                 
+                  <option>新材料</option>             
+                  <option>光机电一体化</option>
+                  <option>生物医药</option>
+                  <option>电子信息</option>
+                  <option>跨境电商</option>
+                  <option>非跨境电商</option>
+                  <option>其他</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid__item grid__item--half">
+              <div class="form-element">
+                <label class="form-element__label" for="kudosTo">登记注册类型:</label>
+                <select class="form-element__input" id="selectResouce">  
+                  <option selected="selected"></option>                  
+                  <option>内资</option>                 
+                  <option>港澳台投资</option>             
+                  <option>外商投资</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="grid">
+            <div class="grid__item grid__item--half">
+              <div class="form-element">
+                <label class="form-element__label" >是否在园区内购地建厂:</label>
+
+                <select class="form-element__input" id="selectResouce">
+                    
+                    <option>是</option>
+                    
+                    <option>否</option>
+          
+                </select>
+              </div>
+            </div>
+            <div class="grid__item grid__item--half">
+              <div class="form-element" id="resouceArea" >
+                <label class="form-element__label"  id="resouceAreaLabel" style="display: none;">购地位置：</label>
+                <input class="form-element__input"  id="resouceAreaInput" type="hidden" style="visibility: hidden;" placeholder="Which team member is this kudos for?"/><small class="form-element__help">Sorry, this is required</small>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="grid">
+            <div class="grid__item grid__item--half">
+              <div class="form-element">
+                <label class="form-element__label" for="kudosFrom">是否为上市企业主体：</label>
+                <select class="form-element__input" id="selectResouce">
+                  <option></option>                    
+                  <option>是</option>                 
+                  <option>否</option>             
+                 
+                </select>
+              </div>
+            </div>
+            <div class="grid__item grid__item--half">
+              <div class="form-element">
+                <label class="form-element__label" for="kudosTo">是否经过认定的高新技术企业:</label>
+                <select class="form-element__input" id="selectResouce">  
+                  <option selected="selected"></option>                  
+                  <option>是</option>                 
+                  <option>否</option>             
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="grid__item grid__item--half">
+              <div class="form-element">
+                <label class="form-element__label" for="kudosFrom">从业人员：</label>
+                <input class="form-element__input" id="kudosTo" type="text" placeholder="输入人员数量"/>
+                <small class="form-element__help">Sorry, this is required</small>
+              </div>
+            </div>
+            <div class="grid__item grid__item--half">
+              <div class="form-element">
+                <label class="form-element__label" for="kudosTo">创业者团队构成:</label>
+                <select class="form-element__input" id="selectResouce">  
+                  <option selected="selected"></option>                  
+                  <option>农民</option>                 
+                  <option>大学生</option>             
+                  <option>高校老师</option  >
+                  <option>留学归国人员</option>
+                  <option>其他</option>            
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="grid">
+            <div class="grid__item grid__item--half">
+              <div class="form-element">
+                <label class="form-element__label" for="kudosFrom">法人/负责人:</label>
+                <input class="form-element__input" id="kudosFrom" type="text" placeholder="请法人/负责任姓名"/><small class="form-element__help">Sorry, this is required</small>
+              </div>
+            </div>
+            <div class="grid__item grid__item--half">
+              <div class="form-element">
+                <label class="form-element__label" for="kudosTo">固定联系人:</label>
+                <input class="form-element__input" id="kudosTo" type="text" placeholder="请输入固定联系人姓名"/><small class="form-element__help">Sorry, this is required</small>
+              </div>
+
+              <div class="spacer spacer--small"></div>
+                <div class="grid">
+                  <div class="grid__item">
+                    <button class="button button--primary button--block" type="button" id="buttonComplete">Send Kudos</button>
+                  </div>
+                </div>
+               </div>
+
+            </div>
+
+            
+          </div  class="grid">
+            
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

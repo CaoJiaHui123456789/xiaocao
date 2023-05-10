@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 禁止浏览器使用缓存 -->
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<!-- 使用EasyUI的默认风格 -->
+<link rel="stylesheet" type="text/css"
+	href="../../css/themes/default/easyui.css">
+<!-- 引入EasyUI的图标 -->
+<link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../../css/index.css">
+<!-- 引入jquery类库 -->
+<!-- <link rel="stylesheet" type="text/css"
+	href="../../js/kindeditor/themes/default/default.css"> -->
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<!-- 引入jquery.easyui类库 -->
+<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="../../js/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../js/jquery.serializejson.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="./js/newsTable.js"></script>
+<!-- <script type="text/javascript"
+	src="../../js/kindeditor/kindeditor-all.js"></script>
+<script type="text/javascript" src="../../js/kindeditor/lang/zh-CN.js"></script> -->
+<title></title>
+</head>
+<body class="easyui-layout">
+	<div data-options="region:'north',split:false"
+		style="height: 40px; text-align: center">
+		<form id="queryForm">
+			<table>
+				<tr>
+					<td>新闻等级:
+					<td><select id="add_newsRanks" class="easyui-combobox"
+						editable="0" style="width: 200px;" name="newsRank">
+							<option value="">全部</option>
+							<option data-options="checked:true" value="1">一级</option>
+							<option value="2">二级</option>
+							<option value="3">三级</option>
+					</select></td>
+					<td></td>
+					<td><a id="btn_search" href="#" class="easyui-linkbutton"
+						data-options="iconCls:'icon-search'">查询</a></td>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div data-options="region:'center',title:'新闻板块'"
+		style="background: #eee; text-align: center">
+		<table id="tbl_News_detail">
+
+		</table>
+	</div>
+	<div data-options="region:'south',split:false,border:false"
+		style="height: 40px; padding: 2px; text-align: right">
+		<a id="btn_addNews" href="#" style="margin: 2px 4px"
+			class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a> <a
+			id="btn_editNews" href="#" style="margin: 2px 4px"
+			class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a> <a
+			id="btn_delNews" href="#" style="margin: 2px 4px"
+			class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+	</div>
+
+	<div id="dlg_NewsSave" class="easyui-dialog" title="增加"
+		style="width: 600px; height: 250px;"
+		data-options="iconCls:'icon-save',resizable:false,modal:true,buttons:'#dlg_btnsave',closable:false,closed:true">
+		<form id="saveFormPost" method="post">
+			<input type="hidden" name="newsId" id="add_newsId" />
+			<div style="width: 100%; text-align: center;">
+			<table style="width: 95%; margin-left: auto; margin-right: auto; margin-top: 30px;"class="datagrid-btable myTable" cellpadding="0">
+					<tr style="vertical-align: middle;">
+						<td style="width: 20%; text-align: right;">
+						<label>新闻编号:</label>
+						</td>
+						<td style="text-align: left; width: 30%;"><input type="text"
+							name="newsCode" id="add_newsCode" class="easyui-textbox"
+							style="width: 177px"
+							data-options="validType:'length[0,20]',required:true" />
+							</td>
+
+						<td style="width: 20%; text-align: right;">
+						<label>新闻模块:</label>
+						</td>
+						<td style="text-align: left; width: 30%"><input type="text"
+							name="newsHead" id="add_newsHead" style="width: 177px"
+							class="easyui-textbox"
+							data-options="validType:'length[0,20]',required:true" />
+							</td>
+
+					</tr>
+					<tr>
+						<td style="width: 20%; text-align: right;">
+						<label>新闻等级:</label>
+						</td>
+						<td style="text-align: left; width: 30%;"><select
+							id="add_newsRank" class="easyui-combobox" name="newsRank"
+							editable="0" style="width: 177px;">
+								<option value="1">一级</option>
+								<option value="2">二级</option>
+								<option value="3">三级</option>
+						</select></td>
+
+						<td style="width: 20%; text-align: right;">
+						<label>统计时间:</label></td>
+						<td style="text-align: left; width: 30%">
+						<input type="text"
+							name="newsTime" id="add_newsTime" style="width: 177px"
+							class="easyui-datebox" />
+						</td>
+					</tr>
+
+					<!--   <div class="easyui-texteditor" title="TextEditor" style="width:700px;height:300px;padding:20px">
+		  <h3 style="text-align:center">TextEditor</h3>
+            <p style="text-align:center">TextEditor is a lightweight html5 editor based on EasyUI. It is completely customizable to fit your needs。</p>
+        </div>
+         </tr>  -->
+					<!--   <textarea id="editor_id" name="content" style="width:1278px;height:592px;">
+		      kindeditor显示
+		 </textarea> -->
+
+				</table>
+
+
+			</div>
+		</form>
+		<div id="dlg_btnsave" style="width: 100%; text-align: center;">
+			<a id="btn_saveNews" style="margin: 2px 16px;" href="#"
+				class="easyui-linkbutton" data-options="iconCls:'icon-ok'">确定</a> <a
+				id="btn_cancelNews" style="margin: 2px 16px;" href="#"
+				class="easyui-linkbutton" data-options="iconCls:'icon-no'">取消</a>
+		</div>
+
+	</div>
+
+</body>
+</html>
+<!-- <script>
+        KindEditor.ready(function(K) {
+                window.editor = K.create('#editor_id');
+        });
+        
+        
+        var options = {
+                cssPath : '/css/index.css',
+                filterMode : true
+        };
+        var editor = K.create('textarea[name="content"]', options);
+        
+        html = editor.html();
+        editor.sync();
+        html = $('#editor_id').val(); // jQuery
+</script> -->

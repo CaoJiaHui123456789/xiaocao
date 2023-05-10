@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+   <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <!-- 使用EasyUI的默认风格 -->
+    <link rel="stylesheet" type="text/css" href="../../css/themes/bootstrap/easyui.css">
+    <!-- 引入EasyUI的图标 -->
+    <link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+    <!-- 引入jquery类库 -->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <!-- 引入jquery.easyui类库 -->
+    <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../../js/jquery.serializejson.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    
+    <link type="text/css" rel="styleSheet"  href="css/indexSwiper.css" />
+	<link type="text/css" rel="styleSheet"  href="css/button.css" />
+	<link type="text/css" rel="styleSheet"  href="css/dialog.css" />
+	<script type="text/javascript" src="js/IndexSwiper.js"></script>
+</head>
+
+<body>
+
+
+	<div class="border" id="border0">
+		<input hidden="true" id="check0" name="check" value="0">
+		<input hidden="true" id="indexSwiperId0" name="indexSwiperId" value="">
+		<div class="frame">
+		    <img class="image" src="img/img1.jpg" id="showimg0"/>
+		</div>
+	</div>
+	
+	<div class="border" id="border1">
+		<input hidden="true" id="check1" name="check" value="0">
+		<input hidden="true" id="indexSwiperId1" name="indexSwiperId" value="">
+		<div class="frame">
+		    <img class="image" src="" id="showimg1"/>
+		</div>
+	</div>
+	
+	<div class="border" id="border2">
+		<input hidden="true" id="check2" name="check" value="0">
+		<input hidden="true" id="indexSwiperId2" name="indexSwiperId" value="">
+		<div class="frame">
+		    <img class="image" src="" id="showimg2"/>
+		</div>
+	</div>
+	
+	<div class="border" id="border3">
+		<input hidden="true" id="check3" name="check" value="0">
+		<input hidden="true" id="indexSwiperId3" name="indexSwiperId" value="">
+		<div class="frame">
+		    <img class="image" src="" id="showimg3"/>
+		</div>
+	</div>
+	
+	<div class="border" id="border4">
+		<input hidden="true" id="check4" name="check" value="0">
+		<input hidden="true" id="indexSwiperId4" name="indexSwiperId" value="">
+		<div class="frame">
+		   <img class="image" src="" id="showimg4"/>
+		</div>
+	</div>
+	
+		<ul >
+			  <li id="add_btn">
+			    <a href="#">
+			      <i class="fa fa-instagram" aria-hidden="true"></i>
+			      <span>新增图片</span>
+			    </a>
+			  </li>
+
+			  <li id="del_btn">
+			    <a href="#">
+			      <i class="fa fa-instagram" aria-hidden="true"></i>
+			      <span>删除图片</span>
+			    </a>
+			  </li>
+			  
+		  </ul>
+
+		<div id="dlg_indexSwiperSave" class="easyui-dialog" title="增加" style="width:700px;height:270px;" data-options="iconCls:'icon-save',resizable:false,modal:true,buttons:'#dlg_btnsave',closable:false,closed:true">
+			<div class="wrapper" aria-labelledby="popupTitle" aria-describedby="popupText" aria-modal="true">
+				<form id="form_importphoto"  method="post" enctype="multipart/form-data">
+					<div style="width:50%;margin-left:25%;margin-top:20px"> 
+						 <input id="add_indexSwiper" name="file" class="easyui-filebox" style="width:300px" data-options="buttonText:'选择图片'">
+					</div>
+					<div style="width:50%;margin-left:25%;margin-top:20px;"> 
+						 <input id="add_indexSwiperName" name="indexSwiperName" class="easyui-textbox" data-options="" style="width:300px" prompt="请输入图片名称">
+					</div>
+				</form>
+				
+				<button id="savePopup" style="width:30%;margin-left:10%;margin-top:20px;" aria-label="Close popup">提交</button>
+				<button id="closePopup" style="width:30%;margin-left:10%;margin-top:20px;" aria-label="Close popup">取消</button>
+			</div>
+		</div>
+	
+</body>	
+
+<style>
+
+</style>
+</html>
